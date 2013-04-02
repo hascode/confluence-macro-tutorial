@@ -1,0 +1,82 @@
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+        <param name="plugin-icon">images/pluginIcon.png</param>
+        <param name="plugin-logo">images/pluginLogo.png</param>
+    </plugin-info>
+
+    <!-- add our i18n resource -->
+    <resource type="i18n" name="i18n" location="macromagic"/>
+    
+    <resource type="download" name="images/" location="images">
+        <param name="content-type" value="image/png"/>
+    </resource>
+    
+	<xhtml-macro name="teaser" class="com.example.plugin.confluence.TeaserItemMacro" key="teaser-xhtml">
+	    <!-- icon="/images/teaser-icon.png" documentation-url="" -->
+		<category name="confluence-content" />
+		<parameters>
+		    <!-- 
+			<default>
+			    <option key="showValueInPlaceholder" value="true"/>
+			</default>
+			 -->
+			<parameter name="size" type="enum" required="true" default="small">
+				<value name="small" />
+				<value name="medium" />
+				<value name="large" />
+				<!-- 
+				<option key="showKeyInPlaceholder" value="false"/>
+				<option key="showValueInPlaceholder" value="true"/> -->
+			</parameter>
+			<parameter name="title" type="string"><!-- 
+				<option key="showKeyInPlaceholder" value="false"/>
+				<option key="showValueInPlaceholder" value="true"/> -->
+			</parameter>
+			<parameter name="newTab" type="boolean"><!-- 
+				<option key="showKeyInPlaceholder" value="false"/>
+				<option key="showValueInPlaceholder" value="true"/> -->
+			</parameter>
+		</parameters>
+		<property-panel>
+		    <spacer/>
+		    <button id="Small" label="S"/>
+		    <button id="Medium" label="M"/>
+		    <button id="Large" label="L"/>
+		    <spacer/>
+		</property-panel>
+	</xhtml-macro>
+	
+	<!-- This is the legacy definition for the same macro for Confluence <= 3.x. We need it to have the macro work within wiki-markup like {teaser-item}..{teaser-item} -->
+	<macro name="teaser" class="com.example.plugin.confluence.TeaserItemMacro" key="teaser">
+		<category name="confluence-content" />
+		<parameters>
+			<parameter name="size" type="enum" required="true" default="small">
+				<value name="small" />
+				<value name="medium" />
+				<value name="large" />
+			</parameter>
+			<parameter name="title" type="string" />
+			<parameter name="newTab" type="boolean" />
+		</parameters>
+	</macro>
+	
+    <web-item key="editor-featured-macro-teaser-item" name="Insert Menu Link - Box Macro" section="system.editor.featured.macros.default" weight="11">
+        <description>Displays an insert box macro link in the tinymce insert menu</description>
+        <label key="com.example.plugin.confluence.macromagic.teaser.label">Box</label>
+        <link linkId="teaser"/>
+		<icon height="16" width="16">
+		    <!-- icon als css angeben -->
+		    <link>/images/sm-plugin-logo.png</link>
+		</icon>
+    </web-item>
+
+    <web-resource name="Box Resources" key="macroeditor-teaser">
+        <context>editor</context>
+        <!-- <dependency>com.atlassian.confluence.tinymceplugin:editor-resources</dependency>-->
+        <resource type="download" name="editor-resource-teaser.js" location="js/editor-resource-teaser.js"/>
+    </web-resource>
+    
+</atlassian-plugin>

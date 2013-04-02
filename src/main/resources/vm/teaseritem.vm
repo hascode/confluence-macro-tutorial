@@ -1,0 +1,25 @@
+<div class="teaser-frame teaser-frame-$!size">
+	#if ($size != "small")
+		<div class="teaser-top"></div>
+	#end
+	<div class="teaser teaser-$!size teaser-$!color">
+		#if ($size != "small")
+			#if ($image != "")
+				<img src="$!imagesrc" />
+			#end
+			<div class="teaser-title">$!title</div>
+			<div class="teaser-content">$!body</div>
+		#end
+		<div class="teaser-arrow">
+			#if ($size == 'small')
+				$!title 
+			#else 
+				$i18n.getText("more.text") 
+			#end
+		</div>
+		#if 
+			($size == "large")<div class="clear">&nbsp;</div>
+		#end
+		<a class="teaser-link $!newTab" href="$!url">$!title</a>
+	</div>
+</div>
