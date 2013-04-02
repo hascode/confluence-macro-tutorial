@@ -14,30 +14,27 @@
         <param name="content-type" value="image/png"/>
     </resource>
     
-	<xhtml-macro name="teaser" class="com.example.plugin.confluence.TeaserItemMacro" key="teaser-xhtml">
-	    <!-- icon="/images/teaser-icon.png" documentation-url="" -->
+	<xhtml-macro name="box" class="com.example.plugin.confluence.BoxMacro" key="box-xhtml">
+	    <!-- icon="/images/box-icon.png" documentation-url="" -->
 		<category name="confluence-content" />
 		<parameters>
-		    <!-- 
 			<default>
 			    <option key="showValueInPlaceholder" value="true"/>
 			</default>
-			 -->
 			<parameter name="size" type="enum" required="true" default="small">
 				<value name="small" />
 				<value name="medium" />
 				<value name="large" />
-				<!-- 
 				<option key="showKeyInPlaceholder" value="false"/>
-				<option key="showValueInPlaceholder" value="true"/> -->
+				<option key="showValueInPlaceholder" value="true"/>
 			</parameter>
-			<parameter name="title" type="string"><!-- 
+			<parameter name="title" type="string">
 				<option key="showKeyInPlaceholder" value="false"/>
-				<option key="showValueInPlaceholder" value="true"/> -->
+				<option key="showValueInPlaceholder" value="true"/>
 			</parameter>
-			<parameter name="newTab" type="boolean"><!-- 
+			<parameter name="newTab" type="boolean"> 
 				<option key="showKeyInPlaceholder" value="false"/>
-				<option key="showValueInPlaceholder" value="true"/> -->
+				<option key="showValueInPlaceholder" value="true"/>
 			</parameter>
 		</parameters>
 		<property-panel>
@@ -49,8 +46,8 @@
 		</property-panel>
 	</xhtml-macro>
 	
-	<!-- This is the legacy definition for the same macro for Confluence <= 3.x. We need it to have the macro work within wiki-markup like {teaser-item}..{teaser-item} -->
-	<macro name="teaser" class="com.example.plugin.confluence.TeaserItemMacro" key="teaser">
+	<!-- This is the legacy definition for the same macro for Confluence <= 3.x. We need it to have the macro work within wiki-markup like {box}..{box} -->
+	<macro name="box" class="com.example.plugin.confluence.BoxMacro" key="box">
 		<category name="confluence-content" />
 		<parameters>
 			<parameter name="size" type="enum" required="true" default="small">
@@ -63,20 +60,20 @@
 		</parameters>
 	</macro>
 	
-    <web-item key="editor-featured-macro-teaser-item" name="Insert Menu Link - Box Macro" section="system.editor.featured.macros.default" weight="11">
+    <web-item key="editor-featured-macro-box-item" name="Insert Menu Link - Box Macro" section="system.editor.featured.macros.default" weight="11">
         <description>Displays an insert box macro link in the tinymce insert menu</description>
-        <label key="com.example.plugin.confluence.macromagic.teaser.label">Box</label>
-        <link linkId="teaser"/>
+        <label key="com.example.plugin.confluence.macromagic.box.label">Box</label>
+        <link linkId="box"/>
 		<icon height="16" width="16">
 		    <!-- icon als css angeben -->
 		    <link>/images/sm-plugin-logo.png</link>
 		</icon>
     </web-item>
 
-    <web-resource name="Box Resources" key="macroeditor-teaser">
+    <web-resource name="Box Resources" key="macroeditor-resources">
         <context>editor</context>
         <!-- <dependency>com.atlassian.confluence.tinymceplugin:editor-resources</dependency>-->
-        <resource type="download" name="editor-resource-teaser.js" location="js/editor-resource-teaser.js"/>
+        <resource type="download" name="editor-resource.js" location="js/editor-resource.js"/>
     </web-resource>
     
 </atlassian-plugin>

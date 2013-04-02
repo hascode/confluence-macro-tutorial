@@ -23,18 +23,17 @@ import com.atlassian.renderer.v2.macro.BaseMacro;
 import com.atlassian.renderer.v2.macro.MacroException;
 
 /**
- * Macro zum Einfügen von Teasern mit Bildern zum Auflockern des Inhalts. Sollte
- * innerhalb eines Section/Column-Container stehen.
+ * Creates a box macro with images. Preferably use section and column macros as
+ * containers.
  * 
  * @example {section} {column}
- *          {teaser-item:icon=icon-name|title=Titel}lorem ipsum{teaser-item} ...
+ *          {box:size=small|title=Title}lorem ipsum{box}
  *          {column} {section}
- * @author Lars-Erik Kimmel / Thomas Zobel
  */
-public class TeaserItemMacro extends BaseMacro implements Macro {
-	private final Logger logger = Logger.getLogger(TeaserItemMacro.class);
+public class BoxMacro extends BaseMacro implements Macro {
+	private final Logger logger = Logger.getLogger(BoxMacro.class);
 
-	private final String TEASER_TEMPLATE = "vm/teaseritem.vm";
+	private final String BOX_TEMPLATE = "vm/macro-box.vm";
 	private final Set<String> SIZES = new HashSet<String>(Arrays.asList(new String[] { "small", "medium", "large" }));
 	private final String DEFAULT_SIZE = "small";
 	private final Set<String> COLORS = new HashSet<String>(Arrays.asList(new String[] { "red", "grey" }));
@@ -59,7 +58,7 @@ public class TeaserItemMacro extends BaseMacro implements Macro {
 			contextMap.put("newTab", "open_new_window");
 		}
 
-		return VelocityUtils.getRenderedTemplate(TEASER_TEMPLATE, contextMap);
+		return VelocityUtils.getRenderedTemplate(BOX_TEMPLATE, contextMap);
 	}
 
 	@Override

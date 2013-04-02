@@ -1,0 +1,25 @@
+<div class="box-frame box-frame-$!size">
+	#if ($size != "small")
+		<div class="box-top"></div>
+	#end
+	<div class="box box-$!size box-$!color">
+		#if ($size != "small")
+			#if ($image != "")
+				<img src="$!imagesrc" />
+			#end
+			<div class="box-title">$!title</div>
+			<div class="box-content">$!body</div>
+		#end
+		<div class="box-arrow">
+			#if ($size == 'small')
+				$!title 
+			#else 
+				$i18n.getText("more.text") 
+			#end
+		</div>
+		#if 
+			($size == "large")<div class="clear">&nbsp;</div>
+		#end
+		<a class="box-link $!newTab" href="$!url">$!title</a>
+	</div>
+</div>

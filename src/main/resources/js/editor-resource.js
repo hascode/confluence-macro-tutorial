@@ -1,5 +1,7 @@
 (function() {
 	
+	
+	
 	var getMacroBody = function(macroDiv) {
         /**
          * serialize() to ensure that any bogus tinymce tags + dirty browser markup are cleaned up.
@@ -23,19 +25,19 @@
         return currentParams;
 	}
 	
-    var updateMacro = function(macroNode, param) {
+    var updateMacro = function(macroName, macroParam, macroNode, param) {
         var $macroDiv = AJS.$(macroNode);
         AJS.Rte.getEditor().selection.select($macroDiv[0]);
         AJS.Rte.BookmarkManager.storeBookmark();
 
         var currentParams = getCurrentParams($macroDiv);
-        currentParams["size"] = param;
+        currentParams[macroParam] = param;
         var macroBody = getMacroBody($macroDiv);
         
         var macroRenderRequest = {
             contentId: Confluence.Editor.getContentId(),
             macro: {
-                name: "teaser",
+                name: macroName,
                 params: currentParams,
                 defaultParameterValue: "",
                 body : macroBody
@@ -45,15 +47,15 @@
         tinymce.confluence.MacroUtils.insertMacro(macroRenderRequest);
     };
 
-    AJS.Confluence.PropertyPanel.Macro.registerButtonHandler("Small", function(e, macroNode) {
+    AJS.Confluence.PropertyPanel.Macro.registerButtonHandler("box", "size", "Small", function(e, macroNode) {
         updateMacro(macroNode, "small");
     });
 
-    AJS.Confluence.PropertyPanel.Macro.registerButtonHandler("Medium", function(e, macroNode) {
+    AJS.Confluence.PropertyPanel.Macro.registerButtonHandler("box", "size", "Medium", function(e, macroNode) {
         updateMacro(macroNode, "medium");
     });
 
-    AJS.Confluence.PropertyPanel.Macro.registerButtonHandler("Large", function(e, macroNode) {
+    AJS.Confluence.PropertyPanel.Macro.registerButtonHandler("box", "size", "Large", function(e, macroNode) {
         updateMacro(macroNode, "large");
     });
  
@@ -61,7 +63,7 @@
 
 
 AJS.bind("init.rte", function() { 
-//	AJS.MacroBrowser.setMacroJsOverride('teaser', {opener: function() {
+//	AJS.MacroBrowser.setMacroJsOverride('box', {opener: function() {
 //		AJS.log("DUMMY OPENER");
 //	    var popup = new AJS.Dialog(860, 530);
 //        popup.show();
