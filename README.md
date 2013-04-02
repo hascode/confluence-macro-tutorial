@@ -5,6 +5,7 @@ Tutorial and code samples to manipulate the creation and/or editing of Confluenc
 
 ## Editor
 
+Possibilities to manipulate the editor and its items.
 
 ### Formatting
 
@@ -38,7 +39,7 @@ Done
 todo
 
 
-= Helpful Links =
+# Helpful Links #
 
 * [https://confluence.atlassian.com/pages/viewpage.action?pageId=225116740](https://confluence.atlassian.com/pages/viewpage.action?pageId=225116740)
 
@@ -46,4 +47,4 @@ todo
 
 ***
 
-This guide was created during work at [//SEIBERT/MEDIA](http://www.seibert-media.net)
+*This guide was created during work at [//SEIBERT/MEDIA](http://www.seibert-media.net)*
