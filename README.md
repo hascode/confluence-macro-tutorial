@@ -21,7 +21,7 @@ Done
 
 ### Insert with custom GUI
 
-Work in progress
+Done
 
 
 ### Macro Options
