@@ -1,5 +1,7 @@
 (function() {
 
+	var macroName = 'box';
+	
     /**
      * Resolves the macro body content.
      * 
@@ -33,7 +35,7 @@
 	/**
 	 * Update macro parameter/body
 	 */
-    var updateMacro = function(macroName, macroParam, macroNode, param) {
+    var updateMacro = function(macroId, macroNode, macroParam, param) {
         var $macroDiv = AJS.$(macroNode);
         
         // celect current macro
@@ -51,7 +53,7 @@
         var macroRenderRequest = {
             contentId: Confluence.Editor.getContentId(),
             macro: {
-                name: macroName,
+                name: macroId,
                 params: currentParams,
                 defaultParameterValue: "",
                 body : macroBody
@@ -65,61 +67,18 @@
     /*
      * Note to myself: This means, that two macros having the same options
      * will have to be treated with caution to not overwrite them with each others content???
+     * TODO: check this
      */
     
     // register handlers for different option buttons 
     AJS.Confluence.PropertyPanel.Macro.registerButtonHandler("Small", function(e, macroNode) {
-        updateMacro("box", "size", macroNode, "small");
+        updateMacro(macroName, macroNode, "size", "small");
     });
     AJS.Confluence.PropertyPanel.Macro.registerButtonHandler("Medium", function(e, macroNode) {
-        updateMacro("box", "size", macroNode, "medium");
+        updateMacro(macroName, macroNode, "size", "medium");
     });
     AJS.Confluence.PropertyPanel.Macro.registerButtonHandler("Large", function(e, macroNode) {
-        updateMacro("box", "size", macroNode, "large");
+        updateMacro(macroName, macroNode, "size", "large");
     });
  
 })();
-
-
-// bind on initialization of editor
-AJS.bind("init.rte", function() { 
-	
-	// create dialog to add macro
-	var dialog = new AJS.Dialog(400, 320);
-	
-	// hide dialog
-	dialog.addCancel("Cancel", function() {
-		dialog.hide();
-	});
-	
-	
-	// add macro to editor
-	dialog.addSubmit("Create Macro", function() {
-
-		// get current selection in editor
-		var selection = AJS.Rte.getEditor().selection.getNode();
-		var macro = {
-				name: 'box', 
-				params: {
-					size: 'small',
-					title: 'TEST'
-				},
-                defaultParameterValue: "",
-				body: 'warg'
-		};
-		
-		// convert macro and insert in DOM
-		tinymce.plugins.Autoconvert.convertMacroToDom(macro, function(data, textStatus, jqXHR ) {
-			AJS.$(selection).html(data);
-		}, function(jqXHR, textStatus, errorThrown ) {
-			AJS.log("error converting macro to DOM");
-		});
-		dialog.hide();
-	});
-	
-	// bind event to open macro browser
-	AJS.MacroBrowser.setMacroJsOverride('box', {opener: function() {
-		// instead open dialog
-        dialog.show();
-	}})
-}); 

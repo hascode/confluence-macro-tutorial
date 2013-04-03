@@ -1,79 +1,162 @@
-<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
-    <plugin-info>
-        <description>${project.description}</description>
-        <version>${project.version}</version>
-        <vendor name="${project.organization.name}" url="${project.organization.url}" />
-        <param name="plugin-icon">images/pluginIcon.png</param>
-        <param name="plugin-logo">images/pluginLogo.png</param>
-    </plugin-info>
+<atlassian-plugin key="${project.groupId}.${project.artifactId}"
+	name="${project.name}" plugins-version="2">
+	<plugin-info>
+		<description>${project.description}</description>
+		<version>${project.version}</version>
+		<vendor name="${project.organization.name}" url="${project.organization.url}" />
+		<param name="plugin-icon">images/16x16_package.png</param>
+		<param name="plugin-logo">images/64x64_package.png</param>
+	</plugin-info>
 
-    <!-- add our i18n resource -->
-    <resource type="i18n" name="i18n" location="macromagic"/>
-    
-    <resource type="download" name="images/" location="images">
-        <param name="content-type" value="image/png"/>
-    </resource>
-    
-	<xhtml-macro name="box" class="com.example.plugin.confluence.BoxMacro" key="box-xhtml">
-	    <!-- icon="/images/box-icon.png" documentation-url="" -->
-		<category name="confluence-content" />
+	<resource type="i18n" name="i18n" location="macromagic">
+		<description>I18n resource</description>
+	</resource>
+
+	<resource type="download" name="images/" location="images">
+		<description>Image resource</description>
+		<param name="content-type" value="image/png" />
+	</resource>
+
+	<web-item key="editor-awesome-format" name="AwesomeFormat"
+		section="system.editor.more.formats" weight="10">
+		<description>Custom format in editor menu</description>
+		<label key="com.example.plugin.confluence.macromagic.customformat" />
+		<link linkId="my-awesome-format" />
+	</web-item>
+
+	<xhtml-macro name="box" class="com.example.plugin.confluence.BoxMacro"
+		key="box-xhtml"
+		icon="/download/resources/com.example.plugin.confluence.macromagic/images/64x64_package.png">
+		<!-- documentation-url="" -->
+		<description>Little boxes ... or big ones</description>
+
+		<!-- Select a category to which the macro belongs -->
+		<category name="visuals" />
+
+		<!-- The parameters node is REQUIRED, but may be empty -->
 		<parameters>
 			<default>
-			    <option key="showValueInPlaceholder" value="true"/>
+				<option key="showValueInPlaceholder" value="true" />
 			</default>
+
+			<parameter name="willbehidden" type="string" />
+
+			<!-- type: one of (string, boolean, enum, int, relativedate, url, color, 
+				label, date, username, group, confluence-content, spacekey) -->
 			<parameter name="size" type="enum" required="true" default="small">
 				<value name="small" />
 				<value name="medium" />
 				<value name="large" />
-				<option key="showKeyInPlaceholder" value="false"/>
-				<option key="showValueInPlaceholder" value="true"/>
+
+				<!-- display mode for parameter key/value -->
+				<option key="showKeyInPlaceholder" value="false" />
+				<option key="showValueInPlaceholder" value="true" />
 			</parameter>
 			<parameter name="title" type="string">
-				<option key="showKeyInPlaceholder" value="false"/>
-				<option key="showValueInPlaceholder" value="true"/>
-			</parameter>
-			<parameter name="newTab" type="boolean"> 
-				<option key="showKeyInPlaceholder" value="false"/>
-				<option key="showValueInPlaceholder" value="true"/>
+
+				<!-- aliases for parameter -->
+				<alias name="" />
+				<alias name="name" />
+
+				<!-- display mode for parameter key/value -->
+				<option key="showKeyInPlaceholder" value="false" />
+				<option key="showValueInPlaceholder" value="true" />
 			</parameter>
 		</parameters>
+
+		<!-- Additional option buttons in editor between 'edit' and 'remove' -->
 		<property-panel>
-		    <spacer/>
-		    <button id="Small" label="S"/>
-		    <button id="Medium" label="M"/>
-		    <button id="Large" label="L"/>
-		    <spacer/>
+			<spacer />
+			<button id="Small" label="S" />
+			<button id="Medium" label="M" />
+			<button id="Large" label="L" />
+			<spacer />
 		</property-panel>
 	</xhtml-macro>
-	
-	<!-- This is the legacy definition for the same macro for Confluence <= 3.x. We need it to have the macro work within wiki-markup like {box}..{box} -->
-	<macro name="box" class="com.example.plugin.confluence.BoxMacro" key="box">
-		<category name="confluence-content" />
+
+	<macro name="box" class="com.example.plugin.confluence.BoxMacro"
+		key="box">
+		<description>This is the legacy definition for the same macro for
+			Confluence less or equal 3.x. We need it to have the macro work
+			within wiki-markup like {box}..{box}
+		</description>
+		<category name="visuals" />
 		<parameters>
 			<parameter name="size" type="enum" required="true" default="small">
 				<value name="small" />
 				<value name="medium" />
 				<value name="large" />
 			</parameter>
-			<parameter name="title" type="string" />
+			<parameter name="title" type="string">
+				<alias name="" />
+				<alias name="name" />
+			</parameter>
 			<parameter name="newTab" type="boolean" />
 		</parameters>
 	</macro>
-	
-    <web-item key="editor-featured-macro-box-item" name="Insert Menu Link - Box Macro" section="system.editor.featured.macros.default" weight="11">
-        <description>Displays an insert box macro link in the tinymce insert menu</description>
-        <label key="com.example.plugin.confluence.macromagic.box.label">Box</label>
-        <link linkId="box"/>
-		<icon height="16" width="16">
-		    <!-- icon als css angeben -->
-		    <link>/images/sm-plugin-logo.png</link>
-		</icon>
-    </web-item>
 
-    <web-resource name="Box Resources" key="macroeditor-resources">
-        <context>editor</context>
-        <!-- <dependency>com.atlassian.confluence.tinymceplugin:editor-resources</dependency>-->
-        <resource type="download" name="editor-resource.js" location="js/editor-resource.js"/>
-    </web-resource>
-    
+	<xhtml-macro name="hillsite"
+		class="com.example.plugin.confluence.HillsiteMacro" key="hillsite-xhtml"
+		icon="/download/resources/com.example.plugin.confluence.macromagic/images/64x64_image.png">
+		<!-- documentation-url="" -->
+		<description>Nice hillsite to relax</description>
+
+		<!-- Select a category to which the macro belongs -->
+		<category name="visuals" />
+
+		<!-- The parameters node is REQUIRED, but may be empty -->
+		<parameters />
+	</xhtml-macro>
+
+	<macro name="hillsite" class="com.example.plugin.confluence.HillsiteMacro"
+		key="hillsite">
+		<description>This is the legacy definition for the same macro for
+			Confluence less or equal 3.x. We need it to have the macro work
+			within wiki-markup like {hillsite}
+		</description>
+		<category name="visuals" />
+		<parameters />
+	</macro>
+
+	<web-item name="menu-link" key="editor-featured-macro-box-item"
+		section="system.editor.featured.macros.default" weight="11">
+		<description>Displays an insert box macro link in the tinymce insert
+			menu
+		</description>
+		<label key="com.example.plugin.confluence.macromagic.box.label">Box</label>
+		<link linkId="box" />
+	</web-item>
+
+	<web-resource name="Box Resource - handle macro with JS"
+		key="macroeditor-box-resources">
+		<description>Box macro related JS resource</description>
+		<context>editor</context>
+		
+		<!-- JS to set properties S,M,L on box macro -->
+		<resource type="download" name="editor-box.js" location="js/editor-box.js" />
+
+		<!-- JS for custom macro gui without using macro browser (for hillsite 
+			macro) -->
+		<resource type="download" name="editor-hillsite.js" location="js/editor-hillsite.js" />
+
+		<!-- JS to insert format in editor -->
+		<resource type="download" name="editor-format.js" location="js/editor-format.js" />
+	</web-resource>
+
+	<web-resource name="Box Resource - add a hidden field"
+		key="hidden-field-parameter">
+		<description>Hide parameter field in box macro</description>
+		<resource type="download" name="hidden-parameter.js"
+			location="js/hidden-parameter.js" />
+		<dependency>confluence.editor.actions:editor-macro-browser
+		</dependency>
+		<context>macro-browser</context>
+	</web-resource>
+
+	<web-resource name="CSS Resource" key="css-resources">
+		<description>CSS resource for all macros</description>
+		<context>editor</context>
+		<resource type="download" name="macromagic.css" location="css/macromagic.css" />
+	</web-resource>
+
 </atlassian-plugin>
