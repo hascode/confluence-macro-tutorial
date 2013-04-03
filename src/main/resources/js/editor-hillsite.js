@@ -18,12 +18,6 @@ AJS.bind("init.rte", function() {
 		var selection = AJS.Rte.getEditor().selection.getNode();
 		var macro = {
 				name: macroName
-// we don't have parameters or a body
-//				params: {
-//					title: 'some title'
-//				},
-//              defaultParameterValue: "",
-//				body: ''
 		};
 		
 		// convert macro and insert in DOM
@@ -37,8 +31,18 @@ AJS.bind("init.rte", function() {
 	
 	// bind event to open macro browser
 	AJS.MacroBrowser.setMacroJsOverride(macroName, {opener: function(macro) {
-		// instead open dialog
+		
+		// open custom dialog
         dialog.show();
-		AJS.log(macro);
+        
+		// we have a macro object here, like the one we're creating later:
+//		var macro = {
+//			name: macroName
+//			params: {
+//				title: 'some title'
+//			},
+//			defaultParameterValue: "",
+//			body: ''
+//		};
 	}});
 }); 

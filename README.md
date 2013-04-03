@@ -21,6 +21,7 @@ Note: Set icon with CSS instead with web-item icon
 ## Macros
 
 TODO: Icon, documentationURL, categories
+https://developer.atlassian.com/display/CONFDEV/Including+Information+in+your+Macro+for+the+Macro+Browser
 
 ### Insert with custom GUI
 
@@ -46,7 +47,8 @@ Done
 
 #### Hidden Parameters
 
-Done
+TODO
+https://developer.atlassian.com/display/CONFDEV/Including+Information+in+your+Macro+for+the+Macro+Browser
 
 
 ### Image place holder

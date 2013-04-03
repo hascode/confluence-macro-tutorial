@@ -39,7 +39,9 @@
 				<option key="showValueInPlaceholder" value="true" />
 			</default>
 
+			<!--
 			<parameter name="willbehidden" type="string" />
+			-->
 
 			<!-- type: one of (string, boolean, enum, int, relativedate, url, color, 
 				label, date, username, group, confluence-content, spacekey) -->
@@ -143,6 +145,7 @@
 		<resource type="download" name="editor-format.js" location="js/editor-format.js" />
 	</web-resource>
 
+<!-- 
 	<web-resource name="Box Resource - add a hidden field"
 		key="hidden-field-parameter">
 		<description>Hide parameter field in box macro</description>
@@ -152,7 +155,8 @@
 		</dependency>
 		<context>macro-browser</context>
 	</web-resource>
-
+ -->
+ 
 	<web-resource name="CSS Resource" key="css-resources">
 		<description>CSS resource for all macros</description>
 		<context>editor</context>
